@@ -28,8 +28,8 @@ const CalendarPreview = ({
 
   // --- Recurrence Calculation Setup ---
   // Parse the start and end dates once for efficiency. Use fallbacks if they don't exist.
-  const start = startDate ? new Date(startDate) : today;
-  const end = endDate ? new Date(endDate) : null;
+  const start = startDate ? new Date(startDate + "T00:00:00") : today;
+  const end = endDate ? new Date(endDate + "T00:00:00") : null;
 
   // Use 1 if the interval is empty or invalid.
   const effectiveInterval =
@@ -80,7 +80,7 @@ const CalendarPreview = ({
             switch (activeId) {
               case "daily":
                 const diffTime = Math.abs(cellDate - start); // (milliseconds in a day) * (3 days)
-                const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+                const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
                 if (diffDays % effectiveInterval === 0) {
                   isActive = true;
                 }

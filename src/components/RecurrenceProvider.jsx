@@ -10,10 +10,10 @@ const RecurrenceProvider = () => {
   // --- State Management ---
   const [activeId, setActiveId] = useState("daily");
   const [interval, setInterval] = useState(1);
-  const today = new Date().toISOString().split("T")[0];
+  const today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
   const [startDate, setStartDate] = useState(today);
   const [endDate, setEndDate] = useState("");
-  // ✨ Set a default selected day based on today's date
+  // Set a default selected day based on today's date
   const dayNames = [
     "Sunday",
     "Monday",
@@ -30,7 +30,7 @@ const RecurrenceProvider = () => {
   // --- Event Handlers ---
   const handleClick = (id) => {
     setActiveId(id);
-    // ✨ UX Improvement: When switching to weekly, auto-select the start date's day of the week.
+    // UX Improvement: When switching to weekly, auto-select the start date's day of the week.
     if (id === "weekly" && startDate) {
       const startDayName = dayNames[new Date(startDate).getDay()];
       setSelectedDays([startDayName]);
@@ -38,20 +38,19 @@ const RecurrenceProvider = () => {
   };
 
   const handleIntervalChange = (value) => {
-    if (value === "" || (value >= 1 && value <= 999)) {
-      setInterval(value);
+    if (value === "") {
+      setInterval(""); // Allow clearing the input, preview will default to 1
+    } else {
+      const numValue = parseInt(value, 10);
+      // Only update state if it's a valid number in our range
+      if (!isNaN(numValue) && numValue > 0 && numValue <= 999) {
+        setInterval(numValue); // Set state with a number, not a string
+      }
     }
   };
 
-  const handleStartDateChange = (e) => {
-    // ✨ FIX: This now correctly handles clearing the date.
-    setStartDate(e.target.value);
-  };
-
-  const handleEndDateChange = (e) => {
-    // ✨ FIX: This now correctly handles clearing the date.
-    setEndDate(e.target.value);
-  };
+  const handleStartDateChange = (e) => setStartDate(e.target.value);
+  const handleEndDateChange = (e) => setEndDate(e.target.value);
 
   const toggleDay = (dayName) => {
     setSelectedDays((prev) =>
