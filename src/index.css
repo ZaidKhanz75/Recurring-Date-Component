@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@theme {
+  --font-primary: "Inter", "sans-serif";
+  --font-secondary: "Roboto", "sans-serif";
+  --color-vibrant-green: #00ff99;
+  --color-vibrant-blue: #0099ff;
+  --color-vibrant-red: #ff0066;
+  --color-vibrant-purple: #9966ff;
+  --color-vibrant-cyan: #00ffff;
+  --color-dark-primary: #0a0a0a;
+  --color-dark-secondary: #1a1a1a;
+  --color-dark-tertiary: #2a2a2a;
+
+}
+
+.vibrant-shadow {
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3), 0 0 40px rgba(255, 0, 255, 0.2);
+}
+
+.calendar-cell {
+  transition: all 0.2s ease;
+}
+
+.calendar-cell:hover {
+  transform: translateY(-2px);
+  transition: all 0.2s ease;
+}
